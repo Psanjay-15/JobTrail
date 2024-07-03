@@ -1,7 +1,9 @@
+import HomeMain from "./components/HomeComponent/HomeMain.jsx";
+
 function App() {
   return (
     <>
-      <p>Sanjay</p>
+      <HomeMain />
     </>
   );
 }
