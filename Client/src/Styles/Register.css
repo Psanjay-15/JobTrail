@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  /* font-family: "Montserrat", sans-serif; */
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
+}
+.gradient-drop-shadow {
+  box-shadow: 0 5px 15px 0px rgba(147, 141, 238, 0.25),
+    0 5px 15px 0px rgba(203, 221, 247, 0.243);
+}

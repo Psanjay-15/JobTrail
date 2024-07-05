@@ -1,6 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 const applicationSchema = new Schema(
   {
+    userId: {
+      type: String,
+    },
     jobposition: {
       type: String,
       required: true,

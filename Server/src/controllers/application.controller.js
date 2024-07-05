@@ -13,6 +13,7 @@ const createApplication = asyncHandler(async (req, res) => {
     salary,
   } = req.body;
 
+  const userId = req.user._id;
   if ([jobposition, company].some((field) => field?.trim() == "")) {
     throw new ApiError(401, "Please enter the required information");
   }
@@ -24,8 +25,10 @@ const createApplication = asyncHandler(async (req, res) => {
   if (jobExisted) {
     throw new ApiError(400, "Comapany and JobPosition already added");
   }
+
   console.log(jobposition);
   const application = await Application.create({
+    userId,
     jobposition,
     company,
     location,
@@ -120,7 +123,9 @@ const readApplication = asyncHandler(async (req, res) => {
 });
 
 const getAllAplication = asyncHandler(async (req, res) => {
-  const applications = await Application.find();
+  const applications = await Application.find({
+    userId: req.user._id,
+  });
 
   return res
     .status(200)

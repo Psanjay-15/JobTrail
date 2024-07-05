@@ -49,11 +49,16 @@ const registerUser = asyncHandler(async (req, res) => {
     fullname,
     password,
   });
+
+  const { accessToken, refreshToken } = await generateAccessAndRefereshToken(
+    user._id
+  );
   // console.log(user);
 
-  const createdUser = await User.findById(user._id).select(
-    "-password -refreshToken"
-  );
+  const createdUser = await User.findById(user._id).select("-password ");
+
+  // createdUser.accessToken = accessToken;
+  // createdUser.refreshToken = refreshToken;
 
   if (!createdUser) {
     throw new ApiError(500, "Something went wrong in creating User");
@@ -61,7 +66,13 @@ const registerUser = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(200, createdUser, "User created successfully!"));
+    .json(
+      new ApiResponse(
+        200,
+        { createdUser, accessToken, refreshToken },
+        "User created successfully!"
+      )
+    );
 });
 
 const loginUser = asyncHandler(async (req, res) => {
