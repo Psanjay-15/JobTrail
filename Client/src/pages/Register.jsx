@@ -49,7 +49,7 @@ function Register() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-gray-950   via-blue-900 via-50%  to-gray-950 	">
+      <div className="bg-gradient-to-br  from-gray-950 via-gray-800 via-50%  to-gray-950 text-black h-4/6	">
         <div className="main flex  items-center justify-center h-screen  ">
           <div className="form h-3/5 border-0 flex flex-row rounded-xl w-2/4 gradient-drop-shadow">
             <div className="w-2/4 border-l-0 rounded-l-lg bg-white ">
@@ -57,7 +57,7 @@ function Register() {
                 Create Account
               </h1>
               <div className="social-container flex justify-center items-center align-middle mt-4 ">
-                <button className="signInWithGoogle flex flex-row text-sky-900 justify-center fMontserrat gap-2 border-2 rounded-full py-2 px-6 text-xs font-semibold hover:bg-indigo-100 hover:border-blue-950">
+                <button className="signInWithGoogle flex flex-row text-sky-900 justify-center Montserrat gap-2 border-2 rounded-full py-2 px-6 text-xs font-semibold hover:bg-indigo-100 hover:border-blue-950">
                   <img className="h-4 w-4 flex items-center" src={google} />
                   SIGN IN WITH GOOGLE
                 </button>

@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-gray-950   via-blue-900 via-50%  to-gray-950 	">
+      <div className="bg-gradient-to-br  from-gray-950 via-gray-800 via-50%  to-gray-950 text-black h-4/6 	">
         <div className="main flex items-center justify-center h-screen  ">
           <div className="form h-3/5 border-0 flex flex-row rounded-xl w-2/4 gradient-drop-shadow ">
             <div className="w-2/4 border-l-0 rounded-l-lg bg-white ">

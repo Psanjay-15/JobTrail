@@ -30,7 +30,6 @@ import dustbin from "../assets/dustbin.png";
 
 function Application() {
   const [application, setApplication] = useState([]);
-  const [sortOrder, setSortOrder] = useState("asc");
   const [company, setCompany] = useState();
   const [jobPostion, setjobPostion] = useState();
   const [location, setLocation] = useState();
@@ -139,20 +138,6 @@ function Application() {
       .finally(() => onClose());
   };
 
-  const handleSort = () => {
-    const sortedApplications = [...applications].sort((a, b) => {
-      const salaryA = parseFloat(a.salary) || 0;
-      const salaryB = parseFloat(b.salary) || 0;
-      if (sortOrder === "asc") {
-        return salaryA - salaryB;
-      } else {
-        return salaryB - salaryA;
-      }
-    });
-    setApplication(sortedApplications);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-  };
-
   const deleteRow = (application) => {
     const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
@@ -223,14 +208,8 @@ function Application() {
                     <Th color="white" textAlign="center">
                       Status
                     </Th>
-                    <Th
-                      color="white"
-                      textAlign="center"
-                      onClick={handleSort}
-                      cursor="pointer"
-                      defaultValue={sortOrder === "desc"}
-                    >
-                      Salary {sortOrder === "asc" ? "▲" : "▼"}
+                    <Th color="white" textAlign="center" cursor="pointer">
+                      Salary
                     </Th>
                     <Th color="white" textAlign="center">
                       Date
@@ -246,8 +225,8 @@ function Application() {
                 <Tbody>
                   {application.map((application) => (
                     <Tr key={application._id} fontSize="medium">
-                      <Td textAlign="center">{application.jobposition}</Td>
                       <Td textAlign="center">{application.company}</Td>
+                      <Td textAlign="center">{application.jobposition}</Td>
                       <Td textAlign="center">
                         {application.location ? application.location : "Remote"}
                       </Td>
