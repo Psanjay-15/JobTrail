@@ -3,13 +3,29 @@ import JobTrail from "../../assets/JobTail.png";
 import { Link } from "react-router-dom";
 
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import "../../Styles/NavBar.css";
 import profile from "../../assets/profile.png";
-// import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import axios from "axios";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 function NavBar() {
+  const handleSignOut = async () => {
+    const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+    await axios
+      .get(BASE_URL + "/users/logout", {
+        withCredentials: true,
+      })
+      .then(() => {
+        sessionStorage.clear();
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="flex flex-row justify-between h-16">
@@ -19,7 +35,7 @@ function NavBar() {
           </Link>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 ">
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <MenuButton className="">
@@ -34,46 +50,18 @@ function NavBar() {
               <div className="py-1">
                 <MenuItem>
                   {({ focus }) => (
-                    <a
-                      href="#"
+                    <button
+                      type="submit"
                       className={classNames(
                         focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block w-full px-4 py-2 text-left text-sm"
                       )}
+                      onClick={handleSignOut}
                     >
-                      Profile
-                    </a>
+                      Sign out
+                    </button>
                   )}
                 </MenuItem>
-                <MenuItem>
-                  {({ focus }) => (
-                    <a
-                      href="#"
-                      className={classNames(
-                        focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
-                      )}
-                    >
-                      Support
-                    </a>
-                  )}
-                </MenuItem>
-
-                <form method="POST" action="#">
-                  <MenuItem>
-                    {({ focus }) => (
-                      <button
-                        type="submit"
-                        className={classNames(
-                          focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                          "block w-full px-4 py-2 text-left text-sm"
-                        )}
-                      >
-                        Sign out
-                      </button>
-                    )}
-                  </MenuItem>
-                </form>
               </div>
             </MenuItems>
           </Menu>

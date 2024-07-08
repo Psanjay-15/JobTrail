@@ -26,7 +26,7 @@ const createApplication = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Comapany and JobPosition already added");
   }
 
-  console.log(jobposition);
+  // console.log(jobposition);
   const application = await Application.create({
     userId,
     jobposition,
@@ -55,7 +55,7 @@ const updateApplication = asyncHandler(async (req, res) => {
   if (!jobposition || !company) {
     throw new ApiError(400, "Please enter Jobpostion and Company");
   }
-  console.log(jobposition);
+  // console.log(_id);
   const application = await Application.findByIdAndUpdate(
     _id,
     {
@@ -71,7 +71,8 @@ const updateApplication = asyncHandler(async (req, res) => {
       new: true,
     }
   );
-  console.table(company);
+
+  // console.log(application);
 
   return res
     .status(200)
@@ -88,7 +89,7 @@ const removeApplication = asyncHandler(async (req, res) => {
   const { _id } = req.body;
 
   const deleteApplication = await Application.findByIdAndDelete(_id);
-  console.log(deleteApplication);
+  // console.log(deleteApplication);
   if (!deleteApplication) {
     throw new ApiError(400, "Application not deleted");
   }

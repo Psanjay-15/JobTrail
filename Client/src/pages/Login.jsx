@@ -50,7 +50,7 @@ function Login() {
                 Sign Account
               </h1>
               <div className="social-container flex justify-center items-center align-middle mt-4 ">
-                <button className="signInWithGoogle flex flex-row text-sky-900 justify-center fMontserrat gap-2 border-2 rounded-full py-2 px-6 text-xs font-semibold hover:bg-indigo-100  hover:border-blue-950">
+                <button className="signInWithGoogle flex flex-row text-sky-900 justify-center Montserrat gap-2 border-2 rounded-full py-2 px-6 text-xs font-semibold hover:bg-indigo-100  hover:border-blue-950">
                   <img className="h-4 w-4 flex items-center" src={google} />
                   SIGN IN WITH GOOGLE
                 </button>
