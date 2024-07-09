@@ -276,6 +276,12 @@ const signInWithGoogleSuccess = asyncHandler(async (req, res, next) => {
   // cookieToken(req.user, res);
 });
 
+const homeRoute = asyncHandler(async (req, res) => {
+  return res
+    .status(200)
+    .json(new ApiResponse(200, { success: true }, "Welcome to api"));
+});
+
 export {
   registerUser,
   loginUser,
@@ -286,4 +292,5 @@ export {
   updateAccountDetails,
   sendProcessingSignal,
   signInWithGoogleSuccess,
+  homeRoute,
 };

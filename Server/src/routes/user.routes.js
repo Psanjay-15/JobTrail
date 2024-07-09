@@ -8,6 +8,7 @@ import {
   updateAccountDetails,
   signInWithGoogleSuccess,
   sendProcessingSignal,
+  homeRoute,
 } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import passport from "passport";
@@ -29,6 +30,7 @@ router
   .route("/auth/google/callback")
   .get(passport.authenticate("google"), signInWithGoogleSuccess);
 
+router.route("/home").get(homeRoute);
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/logout").get(verifyJWT, logoutUser);
