@@ -24,7 +24,7 @@ import {
   Input,
   useDisclosure,
 } from "@chakra-ui/react";
-
+import { Select } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import dustbin from "../assets/dustbin.png";
 
@@ -39,6 +39,8 @@ function Application() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const [datasave, setDatasave] = useState(false);
+  const [applicationId, setApplicationId] = useState("");
 
   const getAllApllications = () => {
     const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
@@ -60,8 +62,9 @@ function Application() {
 
   useEffect(() => {
     getAllApllications();
+    console.log(operation);
     return () => {};
-  }, []);
+  }, [operation, datasave]);
 
   const formatDate = (isoString) => {
     const date = new Date(isoString);
@@ -73,19 +76,33 @@ function Application() {
   };
 
   const handleUpdateApplication = (application) => {
-    const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
     setOperation("update");
+    console.log(operation);
+
+    setApplicationId(application._id);
+    setCompany(application.company);
+    setjobPostion(application.jobpostion);
+    setLink(application.applicationlink);
+    setLocation(application.location);
+    setSalary(application.salary);
+
     onOpen();
+  };
+
+  const handleClick = () => {
+    const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+    console.log("save");
     axios
       .post(
         BASE_URL + "/application/updateapplication",
         {
-          _id: application._id,
-          company: company ? company : application.company,
-          jobposition: jobPostion ? jobPostion : application.jobposition,
-          location: location ? location : application.location,
-          applicationlink: link ? link : application.applicationlink,
-          salary: salary ? salary : application.salary,
+          _id: applicationId,
+          company: company,
+          jobposition: jobPostion,
+          location: location,
+          applicationlink: link,
+          salary: salary,
         },
         {
           headers: {
@@ -100,18 +117,19 @@ function Application() {
         console.log(err);
       })
       .finally(() => {
-        // onClose();
-        // setOperation("add");
+        setDatasave(false);
+        onClose();
+        setOperation("add");
+        // window.location.reload();
       });
   };
 
   const handleAddApplication = () => {
+    console.log("Add applicagtion");
     if (!company || !jobPostion) {
       alert("Please enter company and job position");
     }
     const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
-    setOperation("add");
-    onOpen();
 
     axios
       .post(
@@ -135,17 +153,20 @@ function Application() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => onClose());
+      .finally(() => {
+        window.location.reload();
+      });
   };
 
-  const deleteRow = (application) => {
+  const deleteRow = (id) => {
     const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+    console.log("delete");
 
     axios
       .post(
         BASE_URL + "/application/removeapplication",
         {
-          _id: application._id,
+          _id: id,
         },
         {
           headers: {
@@ -158,6 +179,37 @@ function Application() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        window.location.reload();
+      });
+  };
+
+  const updateStatus = (id, description) => {
+    const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+    console.log("status");
+
+    axios
+      .post(
+        BASE_URL + "/application/updatestatus",
+        {
+          _id: id,
+          description,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        window.location.reload();
       });
   };
 
@@ -205,14 +257,15 @@ function Application() {
                     <Th color="white" textAlign="center">
                       Application Link
                     </Th>
-                    <Th color="white" textAlign="center">
-                      Status
-                    </Th>
+
                     <Th color="white" textAlign="center" cursor="pointer">
                       Salary
                     </Th>
                     <Th color="white" textAlign="center">
                       Date
+                    </Th>
+                    <Th color="white" textAlign="center">
+                      Status
                     </Th>
                     <Th color="white" textAlign="center">
                       Update
@@ -235,14 +288,26 @@ function Application() {
                           Link
                         </Link>
                       </Td>
-                      <Td textAlign="center">
-                        {application.description
-                          ? application.description
-                          : "Applied"}
-                      </Td>
 
                       <Td textAlign="center">{application.salary}</Td>
                       <Td textAlign="center">{formatDate(application.date)}</Td>
+                      <Td textAlign="center">
+                        {/* {application.description
+                          ? application.description
+                          : "Applied"} */}
+                        <Select
+                          placeholder="Select option"
+                          defaultValue={application.description}
+                          onChange={(e) => {
+                            updateStatus(application._id, e.target.value);
+                          }}
+                        >
+                          <option value="Applied">Applied</option>
+                          <option value="Interviewed">Interviewed </option>
+                          <option value="Pending">Pending </option>
+                          <option value="Completed">Completed </option>
+                        </Select>
+                      </Td>
                       <Td>
                         <Button
                           onClick={() => handleUpdateApplication(application)}
@@ -260,7 +325,7 @@ function Application() {
                       <Td>
                         <button
                           className="flex justify-center items-center align-middle"
-                          onClick={() => deleteRow(application)}
+                          onClick={() => deleteRow(application._id)}
                         >
                           <img
                             src={dustbin}
@@ -284,7 +349,7 @@ function Application() {
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader>
-                  {operation === "add"
+                  {operation == "add"
                     ? "Add Application"
                     : "Update Application"}
                 </ModalHeader>
@@ -339,7 +404,15 @@ function Application() {
 
                 <ModalFooter>
                   <Button
-                    onClick={() => handleAddApplication()}
+                    onClick={
+                      () =>
+                        operation == "add"
+                          ? handleAddApplication()
+                          : handleClick()
+                      // onClose(),
+                      // setDatasave(true),
+                      // setOperation("add"),
+                    }
                     colorScheme="blue"
                     mr={3}
                   >

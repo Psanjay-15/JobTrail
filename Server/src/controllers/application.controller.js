@@ -32,7 +32,7 @@ const createApplication = asyncHandler(async (req, res) => {
     jobposition,
     company,
     location,
-    description,
+    description: "Applied",
     applicationlink,
     salary,
   });
@@ -55,24 +55,29 @@ const updateApplication = asyncHandler(async (req, res) => {
   if (!jobposition || !company) {
     throw new ApiError(400, "Please enter Jobpostion and Company");
   }
-  // console.log(_id);
+  console.log(_id);
+  console.log(jobposition);
+  console.log(company);
+  console.log(salary);
+  console.log(location);
+
   const application = await Application.findByIdAndUpdate(
     _id,
     {
-      $set: {
-        jobposition,
-        company,
-        description,
-        salary,
-        location,
-      },
+      // $set: {
+      jobposition,
+      company,
+      salary,
+      location,
+      // },
     },
     {
       new: true,
+      useFindAndModify: false,
     }
   );
 
-  // console.log(application);
+  console.log(application);
 
   return res
     .status(200)
@@ -135,10 +140,28 @@ const getAllAplication = asyncHandler(async (req, res) => {
     );
 });
 
+const updateDescription = asyncHandler(async (req, res) => {
+  const { _id, description } = req.body;
+  if (!description) {
+    throw new ApiError(404, "Description not availabe");
+  }
+
+  const setDescription = await Application.findByIdAndUpdate(
+    _id,
+    {
+      description,
+    },
+    { new: true, useFindAndModify: false }
+  );
+
+  return res(200).json(new ApiResponse(200, description, "Description Added"));
+});
+
 export {
   createApplication,
   updateApplication,
   removeApplication,
   readApplication,
   getAllAplication,
+  updateDescription,
 };

@@ -17,13 +17,7 @@ const applicationSchema = new Schema(
     },
     description: {
       type: String,
-      possibleValues: [
-        "Applied",
-        "Interviewed",
-        "Response Pending",
-        "Follow Up",
-        "Completed",
-      ],
+      possibleValues: ["Applied", "Interviewed", "Pending", "Completed"],
     },
     applicationlink: {
       type: String,
