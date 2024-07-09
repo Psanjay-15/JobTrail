@@ -39,7 +39,7 @@ function Register() {
         sessionStorage.setItem("accessToken", res.data.data.accessToken);
         sessionStorage.setItem("email", res.data.data.createdUser.email);
         sessionStorage.setItem("userName", res.data.data.createdUser.username);
-        window.location.href = "/";
+        window.location.href = "/application";
         // console.log(res.data.data);
       })
       .catch((err) => {

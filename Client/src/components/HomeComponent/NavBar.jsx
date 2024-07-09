@@ -12,19 +12,8 @@ function classNames(...classes) {
 
 function NavBar() {
   const handleSignOut = async () => {
-    const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
-
-    await axios
-      .get(BASE_URL + "/users/logout", {
-        withCredentials: true,
-      })
-      .then(() => {
-        sessionStorage.clear();
-        window.location.href = "/";
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    sessionStorage.clear();
+    window.location.href = "/";
   };
   return (
     <>
