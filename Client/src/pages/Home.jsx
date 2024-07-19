@@ -9,13 +9,13 @@ import demo from "../assets/demo.png";
 function Home() {
   return (
     <>
-      <div className=" home bg-gradient-to-br  from-gray-950 via-gray-800 via-50%  to-gray-950 text-white h-4/6 ">
+      <div className=" home bg-gradient-to-br  from-gray-200 via-gray-100 via-40%  to-gray-200 text-white h-4/6 ">
         {/* <NavBar />
          */}
-        <div className="flex flex-row justify-between h-16">
+        <div className="flex flex-row justify-between h-16 max-sm:justify-between">
           <div className="left-box flex flex-row p-4 pt-1">
             <Link to={"/"}>
-              <img className=" w-36 h-16" src={JobTrail} alt="" />
+              <img className=" w-36 h-16 max-sm:w-32 h-14" src={JobTrail} alt="" />
             </Link>
           </div>
           <div>
@@ -34,31 +34,38 @@ function Home() {
             </Link>
           </div>
         </div>
-
-        <div className=" home first-div  text-center py-20 m-auto p-auto flex flex-col justify-center items-center w-3/5  ">
-          <p className="font-bold text-8xl bg-gradient-to-tr from-gray-700 Montserrat to-gray-300 bg-clip-text text-transparent	">
+        <div>
+        <div className=" home first-div  text-center py-20 m-auto p-auto flex flex-col justify-center items-center w-3/5 max-sm:pb-10 mx-auto px-auto w-5/6 ">
+          <p className=" font-bold text-8xl bg-gradient-to-tr from-indigo-700 Montserrat to-indigo-300 bg-clip-text text-transparent text-center max-sm:text-center max-sm:text-6xl 	">
             Track Your Application More Efficiently
           </p>
-          <p className="home my-10   w-2/3 m-auto text-gray-400 font-semibold">
+
+          <div className="sm:w-5/6">
+          <p className="home my-10  w-2/3 m-auto text-gray-400 font-semibold max-sm:w-5/6 mb-5">
             JobTrail allows you to trak your job application more efficiently.
             It provides you better functionality that makes the tracking process
             easy
           </p>
+          </div>
         </div>
-        <div className="w-3/4 justify-center m-auto z-0">
+
+        <div className="w-3/4 justify-center m-auto max-sm:w-5/6 h-5/6">
           <img
             src={demo}
-            className="border-2 shadow-2xl rounded-xl p-3 bg-background"
+            className="border-1 shadow-2xl rounded-xl p-3 bg-background max-sm:p-1  "
             alt=""
           />
         </div>
+        </div>
 
-        <div className="flex flex-row gap-2 mt-20 pb-10 h-4/5 ">
-          <div className=" w-2/5 m-auto px-12  flex flex-col  align-middle ">
-            <div className="flex flex-row">
-              <img className="w-44 h-24 pt-3" src={JobTrail} />
+
+        <div className="flex flex-row gap-2 mt-20 pb-10 h-4/5 max-sm:flex-col">
+
+          <div className=" w-2/5 m-auto px-12 flex flex-col align-middle max-sm:w-3/5 max-sm:items-center">
+            <div className="flex max-sm:items-center">
+              <img className="w-44 h-24 pt-3 max-sm:flex w-52 h-24 align-middle items-center " src={JobTrail} />
             </div>
-            <p className="justify-center items-center pt-4 text-gray-500 font-semibold">
+            <p className="justify-center items-center pt-4 text-gray-500 font-semibold max-sm:text-center">
               The best platform for Application tracking
             </p>
             <div className="pt-7 flex flex-row gap-3">
@@ -76,7 +83,8 @@ function Home() {
             </div>
           </div>
 
-          <div className=" w-1/5 px-10 mt-7">
+          <div  className="w-3/5 flex flex-row max-sm:flex max-sm:flex-row justify-around">
+          <div className=" w-2/5 px-10 mt-7 max-sm:px-5 ">
             <p className=" text-gray-600 font-semibold text-xl pb-5 ">
               Product
             </p>
@@ -88,7 +96,7 @@ function Home() {
             </ul>
           </div>
 
-          <div className=" w-1/5 px-10 mt-7">
+          <div className=" w-2/5 px-10 mt-7 max-sm:px-5 max-sm:w-1/4">
             <p className=" text-gray-600 font-semibold text-xl pb-5 ">
               Support
             </p>
@@ -104,7 +112,7 @@ function Home() {
             </ul>
           </div>
 
-          <div className=" w-1/5 px-10 mt-7">
+          <div className=" w-2/5 px-10 mt-7 max-sm:px-5 max-sm:w-3/5">
             <p className=" text-gray-600 font-semibold text-xl pb-5 ">
               Help and Solutions
             </p>
@@ -120,6 +128,7 @@ function Home() {
               </li>
               <li className="hover:text-gray-500 cursor-pointer">Policy</li>
             </ul>
+          </div>
           </div>
         </div>
       </div>
