@@ -255,7 +255,10 @@ const signInWithGoogleSuccess = asyncHandler(async (req, res, next) => {
   //sending user object to frontend
   // get token from custom built method
   let myUser = req.user;
-  const token = myUser.getJwtToken();
+  const { accessToken, refreshToken } = await generateAccessAndRefereshToken(
+    myUser._id
+  );
+  // const token = myUser.generateAccessAndRefereshToken();
 
   //set options for the cookie
   const options = {
@@ -271,8 +274,7 @@ const signInWithGoogleSuccess = asyncHandler(async (req, res, next) => {
   //send response
   res
     .status(200)
-    .cookie("token", token, options)
-    .redirect(process.env.REDIRECT_URL);
+    .redirect(process.env.REDIRECT_URL + "/google/" + accessToken );
   // cookieToken(req.user, res);
 });
 
@@ -281,6 +283,7 @@ const homeRoute = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, { success: true }, "Welcome to api"));
 });
+
 
 export {
   registerUser,

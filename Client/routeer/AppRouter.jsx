@@ -5,6 +5,7 @@ import Login from "../src/pages/Login.jsx";
 import Register from "../src/pages/Register.jsx";
 import Application from "../src/pages/Application.jsx";
 import AddAplication from "../src/components/ApplicationComponent/AddAplication.jsx";
+import Google from "../src/pages/Google.jsx";
 function AppRouter() {
   return (
     <>
@@ -14,6 +15,7 @@ function AppRouter() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/application" element={<Application />}></Route>
         <Route path="/addApplication" element={<AddAplication />}></Route>
+        <Route path="/google/:token" element={<Google/>}></Route>
       </Routes>
     </>
   );

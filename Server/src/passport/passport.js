@@ -33,9 +33,11 @@ passport.use(
       console.log("MY PROFILE", profile._json.email);
       User.findOne({ email: profile._json.email }).then((user) => {
         if (user) {
-          //console.log("User already exits in DB", user);
+          console.log("User already exits in DB", user);
           next(null, user);
+
         } else {
+          console.log(profile)
           User.create({
             fullname: profile.displayName,
             googleId: profile.id,
@@ -43,7 +45,7 @@ passport.use(
             password: "google_verified",
           })
             .then((user) => {
-              //console.log("New User", user);
+              console.log("New User", user);
               next(null, user);
               // cookietoken()
             })

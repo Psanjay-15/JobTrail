@@ -78,10 +78,10 @@ function Application() {
   const handleUpdateApplication = (application) => {
     setOperation("update");
     console.log(operation);
-
+    console.log(application)
     setApplicationId(application._id);
     setCompany(application.company);
-    setjobPostion(application.jobpostion);
+    setjobPostion(application.jobposition);
     setLink(application.applicationlink);
     setLocation(application.location);
     setSalary(application.salary);
