@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <>
-      <div className="bg-gradient-to-br  from-gray-950 via-gray-800 via-50%  to-gray-950 text-black h-fit 	">
+      <div className="bg-gradient-to-br  from-gray-950 via-gray-800 via-50%  to-gray-950 text-black h-screen 	">
         <div className="main flex items-center justify-center h-screen ">
           <div className="form h-fit border-0 flex flex-row rounded-xl w-2/4 gradient-drop-shadow max-sm:flex max-sm:items-center max-sm:justify-center">
             <div className="w-2/4 border-l-0 rounded-l-lg bg-white max-sm:w-fit  max-sm:border-r-0 max-sm:rounded-r-lg max-sm:h-full max-sm:px-8 max-sm:pb-4 ">
