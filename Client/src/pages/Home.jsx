@@ -15,10 +15,10 @@ function Home() {
          */}
         <div className="flex flex-row justify-between h-16 max-sm:justify-between sm:w-full">
           <div className="left-box flex flex-row p-4 pt-1 flex items-center sm:pt-2 pl-0">
-            <Link to={"/"}>
-              <img className=" w-38 h-12 max-sm:w-16 pt-2 pl-0 h-14" src={logo} alt="" />
+          <Link to={"/"} className="flex flex-row items-center justify-center">
+              <img className=" w-38 h-14 max-sm:w-16 pt-2 pl-2 " src={logo} alt="" />
+              <p className="font-bold pt-2 text-4xl bg-gradient-to-tr from-violet-800 Montserrat to-pink-200 bg-clip-text text-transparent  hidden sm:block">JobTrail</p>
             </Link>
-            <p className="font-bold text-4xl bg-gradient-to-tr from-blue-700 Montserrat to-blue-300 bg-clip-text text-transparent  hidden sm:block">JobTrail</p>
           </div>
           <div>
             <Link to={"/register"}>
@@ -38,7 +38,7 @@ function Home() {
         </div>
         <div>
         <div className=" home first-div  text-center py-20 m-auto p-auto flex flex-col justify-center items-center w-3/5 max-sm:pb-10 mx-auto px-auto ">
-          <p className=" font-bold text-8xl bg-gradient-to-tr from-blue-700 Montserrat to-blue-300 bg-clip-text text-transparent text-center max-sm:text-center max-sm:text-5xl 	">
+          <p className=" font-bold text-8xl bg-gradient-to-tr from-violet-800 Montserrat to-pink-200 bg-clip-text text-transparent text-center max-sm:text-center max-sm:text-5xl 	">
             Track Your Application More Efficiently
           </p>
 
@@ -66,7 +66,7 @@ function Home() {
           <div className=" w-2/5 flex flex-col items-center">
             <div className="flex flex-row items-center justify-center">
               <img className="w-30 h-16" src={logo} />
-            <p className="font-bold text-4xl bg-gradient-to-tr from-blue-700 Montserrat to-blue-300 bg-clip-text text-transparent ">JobTrail</p>
+            <p className="font-bold text-4xl bg-gradient-to-tr from-violet-800 Montserrat to-pink-200 bg-clip-text text-transparent ">JobTrail</p>
             </div>
             <p className="justify-center items-center pt-4 text-gray-500 font-semibold max-sm:text-center">
               The best platform for Application tracking

@@ -1,5 +1,5 @@
 // import React from 'react'
-import JobTrail from "../../assets/JobTail.png";
+import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -17,12 +17,13 @@ function NavBar() {
   };
   return (
     <>
-      <div className="flex flex-row justify-between h-16">
-        <div className="left-box flex flex-row p-4 pt-1">
-          <Link to={"/"}>
-            <img className=" w-36 h-16" src={JobTrail} alt="" />
-          </Link>
-        </div>
+      <div className="home flex flex-row justify-between h-16">
+      <div className="left-box flex flex-row p-4 pt-1 flex items-center sm:pt-2 pl-0">
+          <Link to={"/"} className="flex flex-row items-center justify-center">
+              <img className=" w-38 h-14 max-sm:w-16 pt-2 pl-2 " src={logo} alt="" />
+              <p className="font-bold pt-2 text-4xl bg-gradient-to-tr from-violet-800 Montserrat to-pink-200 bg-clip-text text-transparent  hidden sm:block">JobTrail</p>
+            </Link>
+          </div>
 
         <div className="p-4 ">
           <Menu as="div" className="relative inline-block text-left">
@@ -34,7 +35,7 @@ function NavBar() {
 
             <MenuItems
               transition
-              className="absolute right-0 z-10 mt-2 w-30 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+              className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
             >
               <div className="py-1">
                 <MenuItem>
@@ -43,7 +44,7 @@ function NavBar() {
                       type="submit"
                       className={classNames(
                         focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block w-[90px] px-4 py-2 text-left text-sm"
+                        "block w-[90px] pl-4 py-2 text-left text-sm"
                       )}
                       onClick={handleSignOut}
                     >

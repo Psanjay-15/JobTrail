@@ -27,7 +27,9 @@ import {
 import { Select } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import dustbin from "../assets/dustbin.png";
-
+import pencil from "../assets/pencil.png";
+import al from "../assets/al.png"
+import plus from "../assets/plus.png"
 function Application() {
   const [application, setApplication] = useState([]);
   const [company, setCompany] = useState();
@@ -215,69 +217,74 @@ function Application() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-gray-950 via-gray-800 via-50%  to-gray-950 text-white h-screen ">
+      <div className="bg-gradient-to-br from-gray-200 via-gray-100 via-50%  to-gray-200 text-white h-screen ">
         <NavBar />
         <div className="m-auto">
           <div className="m-auto px-20 pt-10 flex flex-row">
             <Button
               onClick={onOpen}
               fontFamily="Montserrat"
-              borderRadius="35px"
+              borderRadius="4px"
+              border="1px"
+              borderColor="black"
               fontSize="14px"
               px="20px"
-              py="0px"
-              height="30px"
-              width="100px"
+              py="14px"
+              height="fit"
+              width="fit"
               operation="add"
+              // backgroundColor="black"
+              textColor="black"
             >
-              ADD
+              <img src={plus} alt="" className="w-4 h-4"  />
+              <p className="pl-2 ">Add New Application</p> 
             </Button>
           </div>
         </div>
 
         <div className="container mx-auto py-4">
           <div className="overflow-x-auto ">
-            <TableContainer bgColor="transperent" fontFamily="Montserrat">
-              <Table variant="simple">
+            <TableContainer bgColor="transperent" fontFamily="Montserrat" >
+              <Table variant="simple" >
                 <Thead>
                   <Tr
-                    backgroundColor="Highlight"
+                    backgroundColor="whiteAlpha"
                     fontFamily="Montserrat"
-                    fontSize="small"
+                    
                   >
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Company
                     </Th>
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Job Position
                     </Th>
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Location
                     </Th>
-                    <Th color="white" textAlign="center">
-                      Application Link
+                    <Th color="black" textAlign="center" fontSize="medium">
+                      Link
                     </Th>
 
-                    <Th color="white" textAlign="center" cursor="pointer">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Salary
                     </Th>
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Date
                     </Th>
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Status
                     </Th>
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Update
                     </Th>
-                    <Th color="white" textAlign="center">
+                    <Th color="black" textAlign="center" fontSize="medium">
                       Delete
                     </Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {application.map((application) => (
-                    <Tr key={application._id} fontSize="medium">
+                    <Tr key={application._id} fontSize="medium" textColor="black">
                       <Td textAlign="center">{application.company}</Td>
                       <Td textAlign="center">{application.jobposition}</Td>
                       <Td textAlign="center">
@@ -285,7 +292,7 @@ function Application() {
                       </Td>
                       <Td textAlign="center">
                         <Link to={application.applicationlink} target="_blank">
-                          Link
+                          <img src={al} className="w-8 h-6 flex items-center justify-center pl-2"/>
                         </Link>
                       </Td>
 
@@ -301,25 +308,21 @@ function Application() {
                           onChange={(e) => {
                             updateStatus(application._id, e.target.value);
                           }}
+                          color={application.description=="Applied"?"orange" : application.description=="Interviwed" ? "teal" : application.description=="Pending"?"red" :"green"}
+                          fontSize="lg"
                         >
-                          <option value="Applied">Applied</option>
-                          <option value="Interviewed">Interviewed </option>
-                          <option value="Pending">Pending </option>
-                          <option value="Completed">Completed </option>
+                          <option value="Applied"  as="b">Applied</option>
+                          <option value="Interviewed" >Interviewed </option>
+                          <option value="Pending" >Pending </option>
+                          <option value="Completed" >Completed </option>
                         </Select>
                       </Td>
                       <Td>
                         <Button
                           onClick={() => handleUpdateApplication(application)}
-                          fontFamily="Montserrat"
-                          borderRadius="35px"
-                          fontSize="14px"
-                          px="20px"
-                          py="0px"
-                          height="30px"
-                          width="100px"
+                      
                         >
-                          Update
+                          <img src={pencil} className="h-6 pl-2 w-[60x]"/>
                         </Button>
                       </Td>
                       <Td>
@@ -330,7 +333,7 @@ function Application() {
                           <img
                             src={dustbin}
                             alt="delete"
-                            className="w-6 h-6 flex justify-center items-center align-middle"
+                            className="w-[42px] h-[28px] pl-5 pr-0 flex justify-center items-center "
                           />
                         </button>
                       </Td>
