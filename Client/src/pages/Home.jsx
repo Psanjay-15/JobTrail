@@ -10,7 +10,7 @@ import demo from "../assets/demo.png";
 function Home() {
   return (
     <>
-      <div className=" home bg-gradient-to-br  from-gray-200 via-gray-100 via-40%  to-gray-200 text-white h-4/6 ">
+      <div className=" home bg-gradient-to-br  from-gray-200 via-gray-100 via-40%  to-gray-200 text-white h-fit ">
         {/* <NavBar />
          */}
         <div className="flex flex-row justify-between h-16 max-sm:justify-between sm:w-full">
@@ -54,7 +54,7 @@ function Home() {
         <div className="w-3/4 justify-center m-auto max-sm:w-5/6 h-5/6">
           <img
             src={demo}
-            className="border-1 shadow-2xl rounded-xl p-3 bg-background max-sm:p-1  "
+            className=" border-[1px] w-auto shadow-2xl rounded-xl  bg-background max-sm:p-1  "
             alt=""
           />
         </div>

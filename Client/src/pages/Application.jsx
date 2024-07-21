@@ -217,74 +217,72 @@ function Application() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-gray-200 via-gray-100 via-50%  to-gray-200 text-white h-screen ">
+      <div className="bg-gradient-to-br from-gray-200 via-gray-100 via-50%  to-gray-200 text-white h-fit ">
         <NavBar />
         <div className="m-auto">
-          <div className="m-auto px-20 pt-10 flex flex-row-reverse ">
+          <div className="m-auto px-20 pt-10 flex flex-row-reverse max-sm:pt- max-sm:px-10">
             <Button
               onClick={onOpen}
               fontFamily="Montserrat"
               borderRadius="4px"
               border="1px"
               borderColor="black"
-              fontSize="14px"
-              px="20px"
-              py="14px"
+              fontSize={{ base: '12px', xl:"14px"}}
+              px={{base:"15px",xl:"20px"}}
+              py={{base:"10px",xl:"14px"}}
               height="fit"
               width="fit"
               operation="add"
-              // backgroundColor="black"
               textColor="black"
             >
               <img src={plus} alt="" className="w-4 h-4"  />
-              <p className="pl-2 ">Add New Application</p> 
+              <p className="pl-2 max-sm:hidden ">Add New Application</p> 
             </Button>
           </div>
         </div>
 
         <div className="container mx-auto py-4">
           <div className="overflow-x-auto ">
-            <TableContainer bgColor="transperent" fontFamily="Montserrat" >
+            <TableContainer bgColor="transperent" fontFamily="Montserrat" border="1px" borderRadius="6px" margin={{base:"12px"}}>
               <Table variant="simple" >
                 <Thead>
                   <Tr
-                    backgroundColor="whiteAlpha"
-                    fontFamily="Montserrat"
-                    
+                    borderBottom="2px"
+                    padding={{base:"1px",lg:"2px"}}
                   >
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Company
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Job Position
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Location
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Link
                     </Th>
 
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Salary
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Date
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Status
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Update
                     </Th>
-                    <Th color="black" textAlign="center" fontSize="medium">
+                    <Th color="black" textAlign="center" fontSize={{base:"small",lg:"medium"}} fontFamily="Montserrat" paddingY={{base:"14px",lg:"18px"}}>
                       Delete
                     </Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {application.map((application) => (
-                    <Tr key={application._id} fontSize="medium" textColor="black">
+                    <Tr key={application._id}  textColor="black" fontSize={{base:"small",lg:"medium"}}>
                       <Td textAlign="center">{application.company}</Td>
                       <Td textAlign="center">{application.jobposition}</Td>
                       <Td textAlign="center">
@@ -292,16 +290,13 @@ function Application() {
                       </Td>
                       <Td textAlign="center">
                         <Link to={application.applicationlink} target="_blank">
-                          <img src={al} className="w-8 h-6 flex items-center justify-center pl-2"/>
+                          <img src={al} className="w-8 h-6 max-sm:w-6 max-sm:h-4 flex items-center justify-center pl-2"/>
                         </Link>
                       </Td>
 
                       <Td textAlign="center">{application.salary}</Td>
                       <Td textAlign="center">{formatDate(application.date)}</Td>
                       <Td textAlign="center">
-                        {/* {application.description
-                          ? application.description
-                          : "Applied"} */}
                         <Select
                           placeholder="Select option"
                           defaultValue={application.description}
@@ -309,31 +304,26 @@ function Application() {
                             updateStatus(application._id, e.target.value);
                           }}
                           color={application.description=="Applied"?"orange" : application.description=="Interviewed" ? "#63b3ed" : application.description=="Pending"?"red" :"green"}
-                          fontSize="lg"
+                          fontSize={{base:"small",lg:"medium"}}
                         >
-                          <option value="Applied"  as="b">Applied</option>
+                          <option value="Applied" >Applied</option>
                           <option value="Interviewed" >Interviewed </option>
                           <option value="Pending" >Pending </option>
                           <option value="Completed" >Completed </option>
                         </Select>
                       </Td>
                       <Td className="flex justify-center items-center">
-                        {/* <Button */}
-                          
-                      
-                        
-                          <img src={pencil} className="h-6 pl-2  cursor-pointer" onClick={() => handleUpdateApplication(application)}/>
-                        {/* </Button> */}
+                          <img src={pencil} className="h-6 my-2  cursor-pointer" onClick={() => handleUpdateApplication(application)}/>
                       </Td>
                       <Td>
                         <button
-                          className="flex justify-center items-center align-middle"
+                          className="flex justify-center items-center align-middle p-auto"
                           onClick={() => deleteRow(application._id)}
                         >
                           <img
                             src={dustbin}
                             alt="delete"
-                            className="w-[42px] h-[28px] pl-5 pr-0 flex justify-center items-center "
+                            className="w-[42px] h-[26px] max-sm:w-[38px] max-sm:h-[22px] pl-5 pr-0 flex justify-center items-center "
                           />
                         </button>
                       </Td>
@@ -412,9 +402,6 @@ function Application() {
                         operation == "add"
                           ? handleAddApplication()
                           : handleClick()
-                      // onClose(),
-                      // setDatasave(true),
-                      // setOperation("add"),
                     }
                     colorScheme="blue"
                     mr={3}
