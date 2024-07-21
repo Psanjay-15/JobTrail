@@ -217,7 +217,7 @@ function Application() {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-gray-200 via-gray-100 via-50%  to-gray-200 text-white h-fit ">
+      <div className="bg-gradient-to-br from-gray-200 via-gray-100 via-50%  to-gray-200 text-white h-screen ">
         <NavBar />
         <div className="m-auto">
           <div className="m-auto px-20 pt-10 flex flex-row-reverse max-sm:pt- max-sm:px-10">
