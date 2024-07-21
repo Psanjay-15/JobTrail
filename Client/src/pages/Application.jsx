@@ -220,7 +220,7 @@ function Application() {
       <div className="bg-gradient-to-br from-gray-200 via-gray-100 via-50%  to-gray-200 text-white h-screen ">
         <NavBar />
         <div className="m-auto">
-          <div className="m-auto px-20 pt-10 flex flex-row">
+          <div className="m-auto px-20 pt-10 flex flex-row-reverse ">
             <Button
               onClick={onOpen}
               fontFamily="Montserrat"
@@ -308,7 +308,7 @@ function Application() {
                           onChange={(e) => {
                             updateStatus(application._id, e.target.value);
                           }}
-                          color={application.description=="Applied"?"orange" : application.description=="Interviwed" ? "teal" : application.description=="Pending"?"red" :"green"}
+                          color={application.description=="Applied"?"orange" : application.description=="Interviewed" ? "#63b3ed" : application.description=="Pending"?"red" :"green"}
                           fontSize="lg"
                         >
                           <option value="Applied"  as="b">Applied</option>
@@ -317,13 +317,13 @@ function Application() {
                           <option value="Completed" >Completed </option>
                         </Select>
                       </Td>
-                      <Td>
-                        <Button
-                          onClick={() => handleUpdateApplication(application)}
+                      <Td className="flex justify-center items-center">
+                        {/* <Button */}
+                          
                       
-                        >
-                          <img src={pencil} className="h-6 pl-2 w-[60x]"/>
-                        </Button>
+                        
+                          <img src={pencil} className="h-6 pl-2  cursor-pointer" onClick={() => handleUpdateApplication(application)}/>
+                        {/* </Button> */}
                       </Td>
                       <Td>
                         <button
