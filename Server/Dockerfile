@@ -17,7 +17,7 @@ COPY . .
 COPY .env .env
 
 # Expose the port your app runs on
-EXPOSE 3000
+EXPOSE 8000
 
 # Start the application
 CMD ["node", "src/index.js"]
