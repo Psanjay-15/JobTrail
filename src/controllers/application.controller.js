@@ -3,6 +3,8 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { Application } from "../models/application.model.js";
 
+
+// All the application controller
 const createApplication = asyncHandler(async (req, res) => {
   const {
     jobposition,
