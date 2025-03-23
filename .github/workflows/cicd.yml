@@ -50,15 +50,19 @@ jobs:
         run: |
           gcloud compute ssh ${{ secrets.INSTANCE_NAME }} --zone=${{ secrets.COMPUTE_ZONE }} \
             --command='
+              # Configure Docker to use GCR authentication helper
+              sudo gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+              
               # Clean up Docker resources
               sudo docker stop fastapi-app || true
               sudo docker rm fastapi-app || true
               sudo docker system prune -af
               sudo docker image prune -a -f
-              # Pull and run new container
+              
+              # Pull and run new container  
               sudo docker pull us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/fast-api-backend/fastapi-app:${{ github.sha }}
               sudo docker run -d --restart unless-stopped -p 80:80 \
                 -e GCP_PROJECT_ID=${{ secrets.PROJECT_ID }} \
                 --name fastapi-app \
                 us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/fast-api-backend/fastapi-app:${{ github.sha }}'
-    
+          
