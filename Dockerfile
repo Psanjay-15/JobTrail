@@ -14,7 +14,6 @@ RUN npm install
 COPY . .
 
 # Copy the .env file into the container
-COPY .env .env
 
 # Expose the port your app runs on
 EXPOSE 8000
