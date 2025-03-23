@@ -1,0 +1,64 @@
+name: Optimized CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      GCP_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.PROJECT_ID }}
+
+      - name: Set up Docker Buildx with caching
+        uses: docker/setup-buildx-action@v3
+
+      - name: Configure Docker authentication
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build and Push Docker Images with cache
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/fast-api-backend/fastapi-app:${{ github.sha }}
+            us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/fast-api-backend/fastapi-app:latest
+          build-args: |
+            PROJECT_ID=${{ secrets.PROJECT_ID }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Deploy to Compute Engine with Cleanup
+        id: deploy
+        run: |
+          gcloud compute ssh ${{ secrets.INSTANCE_NAME }} --zone=${{ secrets.COMPUTE_ZONE }} \
+            --command='
+              # Clean up Docker resources
+              sudo docker stop fastapi-app || true
+              sudo docker rm fastapi-app || true
+              sudo docker system prune -af
+              sudo docker image prune -a -f
+              # Pull and run new container
+              sudo docker pull us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/fast-api-backend/fastapi-app:${{ github.sha }}
+              sudo docker run -d --restart unless-stopped -p 80:80 \
+                -e GCP_PROJECT_ID=${{ secrets.PROJECT_ID }} \
+                --name fastapi-app \
+                us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/fast-api-backend/fastapi-app:${{ github.sha }}'
+    
