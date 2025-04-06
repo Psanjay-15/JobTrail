@@ -19,4 +19,4 @@ chmod 600 $ENV_FILE
 echo "Secrets loaded into environment"
 
 # Start the application
-exce node src/index.js
+exec node src/index.js
