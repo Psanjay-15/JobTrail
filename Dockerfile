@@ -19,7 +19,7 @@ COPY . .
 EXPOSE 8000
 
 # Start the application
-CMD ["node", "src/index.js"]
+# CMD ["node", "src/index.js"]
 
 
 # Copy the load_secrets.sh script and make it executable
