@@ -16,7 +16,7 @@ gcloud secrets list --project="$PROJECT_ID" --format="value(name)" | while read 
 done
 
 chmod 600 $ENV_FILE
-echo “Secrets loaded into environment"
+echo "Secrets loaded into environment"
 
 # Start the application
 exce node src/index.js
