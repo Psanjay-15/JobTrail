@@ -20,3 +20,10 @@ EXPOSE 8000
 
 # Start the application
 CMD ["node", "src/index.js"]
+
+
+# Copy the load_secrets.sh script and make it executable
+COPY script.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/script.sh
+
+ENTRYPOINT ["/usr/local/bin/script.sh"]
